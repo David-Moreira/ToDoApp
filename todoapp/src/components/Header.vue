@@ -1,5 +1,5 @@
 <template>
-<div class="header">
+<div class="header md-layout-item">
      <h1> ToDo </h1>
 </div>
   
@@ -13,7 +13,7 @@ export default {
 
 <style scoped>
     .header{
-        background-color:black;
+        background-color: #616161;
         color:white;
     }
 </style>

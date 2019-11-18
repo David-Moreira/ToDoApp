@@ -1,8 +1,7 @@
 <template>
-<div>
-        {{todo.id}}
-        {{todo.title}}
-</div>
+        <div class="todo-item">
+                <strong>{{todo.title}}</strong>
+        </div>
 </template>
 
 <script>
@@ -14,6 +13,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.todo-item{
+        padding: 10px;
+        margin-bottom: 20px;
+}
 </style>

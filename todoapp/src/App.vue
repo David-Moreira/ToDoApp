@@ -1,29 +1,39 @@
 <template>
-  <div id="app">
-    <Header />
-    <ToDoApp />
-  </div>
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+              <v-toolbar color="primary" dark flat>
+                <v-icon>mdi-watch</v-icon>
+                <v-toolbar-title>ToDo</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form>
+                  <ToDoApp/>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import Header from './components/Header.vue'
 import ToDoApp from './components/ToDoApp.vue'
-
 export default {
-  name: 'app',
-  components: {
-    ToDoApp,
-    Header
-  }
-}
-</script>
+  name: 'App',
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+  components: {
+ToDoApp
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
