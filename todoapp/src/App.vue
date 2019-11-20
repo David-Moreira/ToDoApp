@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import ToDoApp from './components/ToDoApp.vue'
+import ToDoApp from './components/ToDo/ToDoApp.vue'
 export default {
   name: 'App',
 
