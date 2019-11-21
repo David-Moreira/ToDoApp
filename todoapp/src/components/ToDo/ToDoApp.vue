@@ -1,9 +1,11 @@
 <template>
 <div> 
-  <ToDoAddItem v-on:todo-newtask="addNewTask"/>
-  <ToDoItem v-on:del-todo="deleteToDo"
-            v-on:sel-todo="selectToDo"
-            v-bind:key="todo.id" v-for="todo in Todos" v-bind:todo="todo"/>
+  <ToDoAddItem @todo-newtask="addNewTask"/>
+  <ToDoItem @del-todo="deleteToDo"
+            @sel-todo="selectToDo"
+            :key="todo.id" 
+            v-for="todo in Todos" 
+            :todo="todo"/>
 </div>
 </template>
 
@@ -20,10 +22,7 @@ export default {
   },
   data(){
     return {
-        Todos: [ {
-          id : 1,
-          title : "Loading..."
-        } ]
+        Todos: []
     }
   },
   created() {
@@ -38,6 +37,8 @@ export default {
     this.Todos = this.Todos.filter(x=> x.id !== id);
   },
   addNewTask(newToDo){
+    const newID = Math.max(...this.Todos.map(x => x.id), 0)+1;
+    newToDo.id = newID;
     this.Todos = [...this.Todos,newToDo];
   }
 

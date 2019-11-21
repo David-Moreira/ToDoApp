@@ -11,7 +11,7 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form v-on:submit.prevent>
+                <v-form @submit.prevent>
                   <ToDoApp/>
                 </v-form>
               </v-card-text>

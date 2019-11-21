@@ -6,10 +6,10 @@
             <v-col cols="12" >
 
                 <v-text-field
-                v-on:keyup.enter="AddNewTask" 
-                v-model="ToDo"
-                label="New Task"
-                clearable
+                    @keyup.enter="AddNewTask" 
+                    v-model="ToDo"
+                    label="New Task"
+                    clearable
                 ></v-text-field>
             </v-col>
             <v-spacer/>
@@ -21,7 +21,7 @@
                     right
                     icon>
                   <v-icon>mdi-plus</v-icon>
-                    </v-btn>
+                </v-btn>
             </v-row>
         </v-card-text>
         </v-card>
