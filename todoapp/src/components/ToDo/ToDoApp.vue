@@ -34,7 +34,8 @@ export default {
     this.Todos[index].completed = !this.Todos[index].completed;
   },
   deleteToDo(id){
-    this.Todos = this.Todos.filter(x=> x.id !== id);
+    if (confirm("Are you sure you would like to delete this task?"))
+      this.Todos = this.Todos.filter(x=> x.id !== id);
   },
   addNewTask(newToDo){
     const newID = Math.max(...this.Todos.map(x => x.id), 0)+1;

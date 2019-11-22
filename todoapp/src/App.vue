@@ -1,5 +1,6 @@
 <template>
-  <v-app id="inspire">
+  <v-app >
+
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
@@ -11,15 +12,16 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form @submit.prevent>
-                  <ToDoApp/>
-                </v-form>
+                  <v-form @submit.prevent>
+                    <ToDoApp/>
+                  </v-form>
               </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
+
   </v-app>
 </template>
 
