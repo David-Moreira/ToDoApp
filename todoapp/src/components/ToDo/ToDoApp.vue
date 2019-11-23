@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="p-bottomgi">
+    <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="p-bottom">
       <v-expansion-panel>
         <v-expansion-panel-header>Add New Task</v-expansion-panel-header>
         <v-expansion-panel-content>
