@@ -28,22 +28,18 @@
         <v-dialog
           ref="dialog"
           v-model="modal"
-          :return-value.sync="date"
           persistent
-          width="290px"
-        >
+          width="290px">
           <template v-slot:activator="{ on }">
             <v-text-field
               v-model="date"
               label="Due Date"
-              readonly
               v-on="on"
+              @focus="date=''"
             ></v-text-field>
           </template>
-          <v-date-picker v-model="date" scrollable @input="modal = false" >
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
-            <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+          <v-date-picker v-model="date" dark scrollable @input="datePickerChange" >
+
           </v-date-picker>
         </v-dialog>
                         </v-col>
@@ -72,7 +68,8 @@ name:"ToDoAddItem",
 components: {ToDoCategory},
 data() {return {
     ToDo: {name: "", category: 0},
-
+    modal: false,
+    date: "",
     errors: []
 
 }},
@@ -102,6 +99,10 @@ Validation(){
     if (this.ToDo.category < 1)
         this.errors.push("Please select a category!")
     return this.errors.length == 0
+},
+datePickerChange(event){
+    this.modal = false;
+    this.date = event;
 }
     
 }}
