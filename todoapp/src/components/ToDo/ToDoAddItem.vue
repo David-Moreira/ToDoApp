@@ -59,6 +59,13 @@
             </v-col>
 
             </v-row>
+
+
+    <v-snackbar
+        v-model="snackbar.show"
+        :timeout="snackbar.timeout">
+              {{ snackbar.msg }}
+      </v-snackbar>
    </div>
 </template>
 
@@ -70,7 +77,8 @@ components: {ToDoCategory},
 data() {return {
     ToDo: {name: "", category: 0, dueDate: ""},
     modal: false,
-    errors: []
+    errors: [],
+    snackbar: {show:false, msg:"New Task Created!", timeout:2000}
 
 }},
 props: {
@@ -93,7 +101,8 @@ AddNewTask(e){
     this.ToDo.category = 0;
     this.ToDo.date = "";
     this.$emit('todo-newtask', newToDo);
-},
+    this.snackbar.show = true;
+     },
 Validation(){
     this.errors = [];
     if (this.ToDo.name == "")

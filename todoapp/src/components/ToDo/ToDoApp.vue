@@ -17,6 +17,12 @@
             :key="todo.id" 
             v-for="todo in Todos" 
             :todo="todo"/>
+      <v-skeleton-loader
+        v-if="this.Todos.length==0"
+        class="mx-auto"
+        max-width=""
+        type="card"
+      ></v-skeleton-loader>
   </v-card>
 </div>
 </template>
@@ -58,7 +64,7 @@ export default {
       const newID = Math.max(...this.Todos.map(x => x.id), 0)+1;
       newToDo.id = newID;
       this.Todos = [...this.Todos,newToDo];
-      this.addTaskPanelState = 1;
+      setTimeout(function(){this.addTaskPanelState = 1}.bind(this), 1500)
     },
     filterTasks(category){
       if (category > 0){
