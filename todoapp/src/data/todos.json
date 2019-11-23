@@ -1,31 +1,31 @@
 [
     {
-      "userId": 1,
       "id": 1,
+      "category":1 ,
       "title": "Bota shake papoila!",
       "completed": false
     },
     {
-      "userId": 1,
       "id": 2,
+      "category":2 ,
       "title": "Ir ali e voltar",
       "completed": false
     },
     {
-      "userId": 1,
       "id": 3,
+      "category":1 ,
       "title": "Descobrir o desconhecido",
       "completed": false
     },
     {
-      "userId": 1,
       "id": 4,
+      "category":2 ,
       "title": "Pensar no que fazer",
       "completed": true
     },
     {
-      "userId": 1,
       "id": 5,
+      "category":3 ,
       "title": "Olha-me este...",
       "completed": false
     }

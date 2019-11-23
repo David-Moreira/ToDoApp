@@ -10,7 +10,6 @@
                 <v-icon>mdi-checkbox-marked-circle</v-icon>
         </v-btn>
         </v-card-title>
-
 </v-card>
 </template>
 
