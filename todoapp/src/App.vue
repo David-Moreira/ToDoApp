@@ -4,7 +4,7 @@
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
-          <v-flex xs12 sm8 md6>
+          <v-flex xs12 sm8 md7>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
                 <v-icon>mdi-watch</v-icon>

@@ -16,7 +16,7 @@
                     clearable
                 ></v-text-field>
             </v-col>
-                <v-col cols="12">
+            <v-col cols="12">
                     <ToDo-Category
                         :categories="categories.filter(x=> x.value>0)"
                         @category-change="ToDo.category = $event"
@@ -24,6 +24,29 @@
 
                 </ToDo-Category>
             </v-col>
+    <v-col cols="12">
+        <v-dialog
+          ref="dialog"
+          v-model="modal"
+          :return-value.sync="date"
+          persistent
+          width="290px"
+        >
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="date"
+              label="Due Date"
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" scrollable @input="modal = false" >
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+          </v-date-picker>
+        </v-dialog>
+                        </v-col>
              <v-spacer/>
             <v-col>           
                 <v-btn @click="AddNewTask"                      

@@ -3,7 +3,8 @@
       "id": 1,
       "category":1 ,
       "title": "Bota shake papoila!",
-      "completed": false
+      "completed": false,
+      "dueDate": "2019-12-31"
     },
     {
       "id": 2,

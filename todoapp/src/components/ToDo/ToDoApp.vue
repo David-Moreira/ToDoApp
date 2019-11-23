@@ -1,6 +1,6 @@
 <template>
 <div> 
-      <v-expansion-panels class="ToDoAddItem">
+      <v-expansion-panels accordion dark popout class="ToDoAddItem">
       <v-expansion-panel
       >
         <v-expansion-panel-header>Add New Task</v-expansion-panel-header>
@@ -9,7 +9,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-  <v-card raised>
+  <v-card raised >
     <v-card-title>
       <ToDoCategory :categories="Categories" @category-change="filterTasks"/>
     </v-card-title>
