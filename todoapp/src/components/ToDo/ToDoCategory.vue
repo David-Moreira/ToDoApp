@@ -3,7 +3,7 @@
             v-model="select"
             :items="categories"
             label="Category:"
-            @change="$emit('category-change',select)"
+            @change="$emit('category-change', select)"
           >
           </v-select>
 </template>

@@ -1,8 +1,7 @@
 <template>
 <div> 
-      <v-expansion-panels accordion dark popout class="ToDoAddItem">
-      <v-expansion-panel
-      >
+      <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="ToDoAddItem">
+      <v-expansion-panel >
         <v-expansion-panel-header>Add New Task</v-expansion-panel-header>
         <v-expansion-panel-content>
             <ToDoAddItem  @todo-newtask="addNewTask" :categories="Categories"/>
@@ -38,7 +37,8 @@ export default {
   data(){
     return {
         Todos: [],
-        Categories: []
+        Categories: [],
+        addTaskPanelState: 1
     }
   },
   created() {
@@ -58,6 +58,7 @@ export default {
       const newID = Math.max(...this.Todos.map(x => x.id), 0)+1;
       newToDo.id = newID;
       this.Todos = [...this.Todos,newToDo];
+      this.addTaskPanelState = 1;
     },
     filterTasks(category){
       if (category > 0){

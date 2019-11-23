@@ -32,13 +32,14 @@
           width="290px">
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="date"
+              v-model="ToDo.date"
               label="Due Date"
               v-on="on"
-              @focus="date=''"
+              @focus="ToDo.date=''"
+              clearable
             ></v-text-field>
           </template>
-          <v-date-picker v-model="date" dark scrollable @input="datePickerChange" >
+          <v-date-picker v-model="ToDo.date" dark scrollable @input="datePickerChange" >
 
           </v-date-picker>
         </v-dialog>
@@ -67,9 +68,8 @@ export default {
 name:"ToDoAddItem",
 components: {ToDoCategory},
 data() {return {
-    ToDo: {name: "", category: 0},
+    ToDo: {name: "", category: 0, dueDate: ""},
     modal: false,
-    date: "",
     errors: []
 
 }},
@@ -86,10 +86,12 @@ AddNewTask(e){
         id: 999,
         title: this.ToDo.name,
         category: this.ToDo.category,
+        dueDate: this.ToDo.date,
         completed: false
     }
     this.ToDo.name = "";
     this.ToDo.category = 0;
+    this.ToDo.date = "";
     this.$emit('todo-newtask', newToDo);
 },
 Validation(){
@@ -102,7 +104,7 @@ Validation(){
 },
 datePickerChange(event){
     this.modal = false;
-    this.date = event;
+    this.ToDo.date = event;
 }
     
 }}
