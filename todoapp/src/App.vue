@@ -1,6 +1,5 @@
 <template>
-  <v-app >
-
+  <v-app>
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
@@ -12,30 +11,29 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                  <v-form @submit.prevent>
-                    <ToDoApp/>
-                  </v-form>
+                <v-form @submit.prevent>
+                  <ToDoApp/>
+                </v-form>
               </v-card-text>
             </v-card>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
-
   </v-app>
 </template>
 
 <script>
-import ToDoApp from './components/ToDo/ToDoApp.vue'
+import ToDoApp from "./components/ToDo/ToDoApp.vue";
 export default {
-  name: 'App',
+  name: "App",
 
   components: {
-ToDoApp
+    ToDoApp
   },
 
   data: () => ({
     //
-  }),
+  })
 };
 </script>
