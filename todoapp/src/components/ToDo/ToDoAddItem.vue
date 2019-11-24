@@ -38,7 +38,6 @@
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-col>
-  <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">{{ snackbar.msg }}</v-snackbar>
 </v-card>
 </template>
 
@@ -52,7 +51,7 @@ export default {
       ToDo: { name: "", category: 0, dueDate: "" },
       modal: false,
       errors: [],
-      snackbar: { show: false, msg: "New Task Created!", timeout: 2000 }
+      
     };
   },
   props: {
@@ -74,7 +73,6 @@ export default {
       this.ToDo.category = 0;
       this.ToDo.date = "";
       this.$emit("todo-newtask", newToDo);
-      this.snackbar.show = true;
     },
     Validation() {
       this.errors = [];
