@@ -1,20 +1,20 @@
 <template>
   <div>
-    <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="p-bottom">
+    <!-- <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="p-bottom">
       <v-expansion-panel>
         <v-expansion-panel-header>Add New Task</v-expansion-panel-header>
         <v-expansion-panel-content>
           <ToDoAddItem @todo-newtask="addNewTask" :categories="Categories"/>
         </v-expansion-panel-content>
       </v-expansion-panel>
-    </v-expansion-panels>
+    </v-expansion-panels>-->
     <v-card raised class="p-bottom">
       <v-card-title>
-        <ToDoCategory :categories="Categories" @category-change="filterTasks"/>
+        <ToDoCategory :categories="Categories" @category-change="filterTasks" />
       </v-card-title>
       <ToDoItem
         @del-todo="deleteToDo"
-        @sel-todo="selectToDo"
+        @sel-todo="completeToDo"
         :key="todo.id"
         v-for="todo in Todos"
         :todo="todo"
@@ -25,57 +25,28 @@
 </template>
 
 <script>
-import todosJson from "@/data/todos.json";
-import categoriesJson from "@/data/categories.json";
 import ToDoItem from "./ToDoItem.vue";
-import ToDoAddItem from "./ToDoAddItem.vue";
 import ToDoCategory from "./ToDoCategory.vue";
+import { mapActions } from 'vuex'
 
 export default {
   name: "ToDoApp",
-  components: { ToDoItem, ToDoAddItem, ToDoCategory },
+  components: { ToDoItem,ToDoCategory },
   props: {
     msg: String
   },
-  data() {
-    return {
-      Todos: [],
-      Categories: [],
-      addTaskPanelState: 1
-    };
-  },
-  created() {
-    this.Todos = todosJson;
-    this.Categories = categoriesJson.map(x => {
-      return { value: x.id, text: x.name };
-    });
+  computed: {
+      Todos(){ return this.$store.state.tasks;},
+      Categories(){ return this.$store.getters.categoriesKeyValue;},
   },
   methods: {
-    selectToDo(id) {
-      let index = this.Todos.findIndex(x => x.id == id);
-      this.Todos[index].completed = !this.Todos[index].completed;
-    },
+    ...mapActions([
+      "completeToDo",
+      "filterTasks"      
+    ]),
     deleteToDo(id) {
       if (confirm("Are you sure you would like to delete this task?"))
-        this.Todos = this.Todos.filter(x => x.id !== id);
-    },
-    addNewTask(newToDo) {
-      const newID = Math.max(...this.Todos.map(x => x.id), 0) + 1;
-      newToDo.id = newID;
-      this.Todos = [...this.Todos, newToDo];
-      setTimeout(
-        function() {
-          this.addTaskPanelState = 1;
-        }.bind(this),
-        1500
-      );
-    },
-    filterTasks(category) {
-      if (category > 0) {
-        this.Todos = todosJson.filter(x => x.category == category);
-      } else {
-        this.Todos = todosJson;
-      }
+        this.$store.dispatch("deleteToDo", id);
     }
   }
 };
@@ -84,5 +55,8 @@ export default {
 <style scoped>
 .p-bottom {
   padding-bottom: 15px;
+}
+.m-bottom {
+  margin-bottom: 15px;
 }
 </style>

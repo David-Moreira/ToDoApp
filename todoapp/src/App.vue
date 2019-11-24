@@ -5,11 +5,7 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md7>
             <v-card class="elevation-12">
-              <v-toolbar color="primary" dark flat>
-                <v-icon>mdi-watch</v-icon>
-                <v-toolbar-title>ToDo</v-toolbar-title>
-                <v-spacer></v-spacer>
-              </v-toolbar>
+            <ToDoHeader/>
               <v-card-text>
                 <v-form @submit.prevent>
                   <ToDoApp/>
@@ -25,11 +21,13 @@
 
 <script>
 import ToDoApp from "./components/ToDo/ToDoApp.vue";
+import ToDoHeader from "./components/ToDo/ToDoHeader.vue"
 export default {
   name: "App",
 
   components: {
-    ToDoApp
+    ToDoApp,
+    ToDoHeader
   },
 
   data: () => ({
