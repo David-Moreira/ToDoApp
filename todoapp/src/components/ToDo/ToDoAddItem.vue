@@ -14,7 +14,7 @@
     </v-col>
     <v-col cols="12">
       <ToDo-Category
-        :categories="categories.filter(x=> x.value>0)"
+        :categories="categories"
         @category-change="ToDo.category = $event"
       ></ToDo-Category>
     </v-col>

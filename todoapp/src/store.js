@@ -1,17 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-import categoriesJson from "@/data/categories.json";
 import firebaseDB from './firebase.js';
 
 const tasksCol = "tasks";
+const categoriesCol = "categories";
 
 export default new Vuex.Store({
     state: {
-        categories: categoriesJson,
+        categories: [],
         tasks: []
     },
     mutations: {
+        loadCategories(state){
+            let categories  = firebaseDB.read(categoriesCol)
+            categories.then(x=> state.categories = x);
+        },
         loadTasks(state){
             let tasks = firebaseDB.read(tasksCol)
             tasks.then(x=> state.tasks = x);
@@ -19,9 +23,11 @@ export default new Vuex.Store({
         completeToDo(state, id) {
             let index = state.tasks.findIndex(x => x.id == id);
             state.tasks[index].completed = !state.tasks[index].completed;
+            firebaseDB.update(tasksCol, state.tasks[index]);
         },
         deleteToDo(state, id) {
             state.tasks = state.tasks.filter(x => x.id !== id);
+            firebaseDB. delete(tasksCol, id)
         },
         addNewTask(state, newToDo) {
             state.tasks = [...state.tasks, newToDo];
@@ -29,16 +35,14 @@ export default new Vuex.Store({
             id.then(x=> newToDo.id = x)
         },
         filterTasks(state, category) {
-            if (category > 0) {
-                state.tasks = state.tasks.filter(x => x.category == category);
-            }
-            else {
-                let tasks = firebaseDB.read(tasksCol)
-                tasks.then(x=> state.tasks = x);
-            }
+            let tasks = firebaseDB.read(tasksCol);
+            tasks.then(x=> state.tasks = x.filter(x => x.category == category));
         }
     },
     actions: {
+        loadCategories(context){
+            context.commit("loadCategories");
+        },
         loadTasks(context){
             context.commit("loadTasks");
         },
@@ -59,7 +63,7 @@ export default new Vuex.Store({
         categoriesKeyValue(state) {
             return state.categories.map(x => {
                 return { value: x.id, text: x.name };
-            });
+            }).sort((x, y) => +(x.text > y.text) || +(x.text === y.text) -1 );
         }
     }
 });

@@ -38,6 +38,7 @@ export default {
   },
   mounted () {
     this.loadTasks();
+    this.loadCategories();
   },
   computed: {
       Todos(){ 
@@ -49,7 +50,8 @@ export default {
     ...mapActions([
       "completeToDo",
       "filterTasks",
-      "loadTasks"      
+      "loadTasks",
+      "loadCategories"     
     ]),
     deleteToDo(id) {
       if (confirm("Are you sure you would like to delete this task?"))

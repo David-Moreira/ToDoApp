@@ -40,6 +40,14 @@ return {
             });
         return data;
 
+    },
+    delete: async function (collection,id){
+        let col = db.collection(collection);
+        await col.doc(id).delete();
+    },
+    update: async function (collection, obj){
+        let col = db.collection(collection);
+        await col.doc(obj.id).set(obj);
     }
 };
 
