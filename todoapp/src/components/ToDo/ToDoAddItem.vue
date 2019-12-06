@@ -29,7 +29,7 @@
             clearable
           ></v-text-field>
         </template>
-        <v-date-picker v-model="ToDo.date" dark scrollable @input="datePickerChange"></v-date-picker>
+        <v-date-picker v-model="ToDo.date" scrollable @input="datePickerChange"></v-date-picker>
       </v-dialog>
     </v-col>
     <v-spacer />

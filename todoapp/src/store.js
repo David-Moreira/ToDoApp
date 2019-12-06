@@ -1,17 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-
-
-import todosJson from "@/data/todos.json";
 import categoriesJson from "@/data/categories.json";
+import firebaseDB from './firebase.js';
+
+const tasksCol = "tasks";
 
 export default new Vuex.Store({
     state: {
         categories: categoriesJson,
-        tasks: todosJson
+        tasks: []
     },
     mutations: {
+        loadTasks(state){
+            let tasks = firebaseDB.read(tasksCol)
+            tasks.then(x=> state.tasks = x);
+        },
         completeToDo(state, id) {
             let index = state.tasks.findIndex(x => x.id == id);
             state.tasks[index].completed = !state.tasks[index].completed;
@@ -20,20 +24,24 @@ export default new Vuex.Store({
             state.tasks = state.tasks.filter(x => x.id !== id);
         },
         addNewTask(state, newToDo) {
-            const newID = Math.max(...state.tasks.map(x => x.id), 0) + 1;
-            newToDo.id = newID;
             state.tasks = [...state.tasks, newToDo];
+            let id = firebaseDB.write(tasksCol, newToDo);
+            id.then(x=> newToDo.id = x)
         },
         filterTasks(state, category) {
             if (category > 0) {
                 state.tasks = state.tasks.filter(x => x.category == category);
             }
             else {
-                state.tasks = todosJson;
+                let tasks = firebaseDB.read(tasksCol)
+                tasks.then(x=> state.tasks = x);
             }
         }
     },
     actions: {
+        loadTasks(context){
+            context.commit("loadTasks");
+        },
         completeToDo(context, id) {
             context.commit("completeToDo", id);
         },

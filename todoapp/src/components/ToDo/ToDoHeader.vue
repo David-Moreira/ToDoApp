@@ -6,7 +6,7 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on }">
-          <v-btn icon right shaped v-on="on" color="black">
+          <v-btn  right shaped v-on="on"  color="black">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </template>

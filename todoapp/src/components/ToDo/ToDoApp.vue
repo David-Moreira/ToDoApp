@@ -20,6 +20,7 @@
         :todo="todo"
       />
       <v-skeleton-loader v-if="this.Todos.length==0" class="mx-auto" max-width type="card"></v-skeleton-loader>
+
     </v-card>
   </div>
 </template>
@@ -35,14 +36,20 @@ export default {
   props: {
     msg: String
   },
+  mounted () {
+    this.loadTasks();
+  },
   computed: {
-      Todos(){ return this.$store.state.tasks;},
+      Todos(){ 
+          return this.$store.state.tasks;
+        },
       Categories(){ return this.$store.getters.categoriesKeyValue;},
   },
   methods: {
     ...mapActions([
       "completeToDo",
-      "filterTasks"      
+      "filterTasks",
+      "loadTasks"      
     ]),
     deleteToDo(id) {
       if (confirm("Are you sure you would like to delete this task?"))
