@@ -18,7 +18,7 @@
         :key="todo.id"
         v-for="todo in TodosPagination"
         :todo="todo"/>
-      <ToDoPagination :numItems="numItems" :total="Todos.length" @pageNum="currentPage=$event-1"   />
+      <ToDoPagination v-if="this.Todos.length>0" :numItems="numItems" :total="Todos.length" @pageNum="currentPage=$event-1"   />
       <div v-if="this.Todos.length==0"  class="mx-auto" max-width >
         <v-card-title >
           <span style="margin:auto;" > No Tasks... </span>
