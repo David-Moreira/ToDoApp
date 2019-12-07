@@ -15,7 +15,8 @@
     <v-col cols="12">
       <ToDo-Category
         :categories="categories"
-        @category-change="ToDo.category = $event"
+        v-model="ToDo.category"
+        
       ></ToDo-Category>
     </v-col>
     <v-col cols="12">
@@ -48,15 +49,13 @@ export default {
   components: { ToDoCategory },
   data() {
     return {
-      ToDo: { name: "", category: 0, dueDate: "" },
+      ToDo: { name: "", dueDate: "", category: null },
       modal: false,
       errors: [],
-      
+      category: null
     };
   },
-  props: {
-    categories: Array,
-  },
+  props: ["categories", "value"],
   methods: {
     AddNewTask(e) {
       e.preventDefault();
@@ -69,15 +68,16 @@ export default {
         dueDate: this.ToDo.date,
         completed: false
       };
-      this.ToDo.name = "";
-      this.ToDo.category = 0;
-      this.ToDo.date = "";
       this.$emit("todo-newtask", newToDo);
+       this.$nextTick(() => {
+       this.ToDo = {name: "",dueDate: "", category:null }
+       });
+
     },
     Validation() {
       this.errors = [];
-      if (this.ToDo.name == "") this.errors.push("Please insert a task!");
-      if (this.ToDo.category < 1) this.errors.push("Please select a category!");
+      if (this.ToDo.name.trim() == "") this.errors.push("Please insert a title!");
+      if (this.ToDo.category == null) this.errors.push("Please insert a category!");
       return this.errors.length == 0;
     },
     datePickerChange(event) {

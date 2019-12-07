@@ -36,7 +36,7 @@ export default new Vuex.Store({
         },
         filterTasks(state, category) {
             let tasks = firebaseDB.read(tasksCol);
-            tasks.then(x=> state.tasks = x.filter(x => x.category == category));
+            tasks.then(x=> state.tasks = x.filter(x => (x.category == category) || (category == null)));
         }
     },
     actions: {
@@ -44,7 +44,7 @@ export default new Vuex.Store({
             context.commit("loadCategories");
         },
         loadTasks(context){
-            context.commit("loadTasks");
+            context.commit("filterTasks", null);
         },
         completeToDo(context, id) {
             context.commit("completeToDo", id);

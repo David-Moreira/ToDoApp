@@ -4,7 +4,7 @@
       <v-icon>mdi-watch</v-icon>
       <v-toolbar-title>ToDo</v-toolbar-title>
       <v-spacer></v-spacer>
-    <to-do-refresh class="ma-1"/>
+    <!-- <to-do-refresh class="ma-1"/> -->
       <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on }">
           <v-btn  right shaped v-on="on"  color="black">
@@ -20,11 +20,11 @@
 
 <script>
 import ToDoAddItem from "./ToDoAddItem.vue";
-import ToDoRefresh from './ToDoRefresh.vue';
+
 
 export default {
   name: "todo-header",
-  components: { ToDoAddItem, ToDoRefresh },
+  components: { ToDoAddItem },
   data() {
     return {
       dialog: false,
