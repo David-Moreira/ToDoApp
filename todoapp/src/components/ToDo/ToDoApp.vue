@@ -1,31 +1,24 @@
 <template>
   <div>
-    <!-- <v-expansion-panels v-model="addTaskPanelState" accordion dark popout class="p-bottom">
-      <v-expansion-panel>
-        <v-expansion-panel-header>Add New Task</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <ToDoAddItem @todo-newtask="addNewTask" :categories="Categories"/>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>-->
     <v-card raised class="p-bottom">
       <v-card-title>
         <ToDoCategory v-model="selectedCategory" clearable="true" :categories="Categories" @category-change="filterTasks" />
       </v-card-title>
+      <v-card-subtitle class="pb-0 d-flex flex-row-reverse" >
+      <v-checkbox v-model="showCompleted" label = "Show Completed">  </v-checkbox>
+      </v-card-subtitle>
       <ToDoItem
         @del-todo="deleteToDo"
         @sel-todo="completeToDo"
         :key="todo.id"
         v-for="todo in TodosPagination"
         :todo="todo"/>
-      <ToDoPagination v-if="this.Todos.length>0" :numItems="numItems" :total="Todos.length" @pageNum="currentPage=$event-1"   />
+      <ToDoPagination  :numItems="numItems" :total="Todos.length" @pageNum="currentPage=$event-1"   />
       <div v-if="this.Todos.length==0"  class="mx-auto" max-width >
         <v-card-title >
           <span style="margin:auto;" > No Tasks... </span>
         </v-card-title>
       </div>
-      <!-- <v-skeleton-loader v-if="this.Todos.length==0" class="mx-auto" max-width type="card"></v-skeleton-loader> -->
-
     </v-card>
   </div>
 </template>
@@ -42,7 +35,8 @@ export default {
     return {
       selectedCategory: null,
       currentPage: 0,
-      numItems: 5
+      numItems: 5,
+      showCompleted: false
     }
   },
   components: { ToDoItem,ToDoCategory,ToDoPagination },
@@ -55,7 +49,7 @@ export default {
   },
   computed: {
       Todos(){ 
-          return this.$store.state.tasks;
+          return this.$store.state.tasks.filter(x=> (!x.completed && !this.showCompleted) || this.showCompleted);
         },
         TodosPagination(){
           let total = this.total(this.currentPage,this.numItems);
